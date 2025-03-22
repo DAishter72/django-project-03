@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listado de Películas</title>
+    <link rel="stylesheet" href="{% static 'css/list_pelis.css' %}" />
+  </head>
+  <body>
+    <!-- Botón para alternar modo oscuro -->
+    <button id="dark-mode-toggle">Modo Oscuro</button>
+
+    <h1>Listado de Películas</h1>
+    <div class="pelicula-container">
+      {% for pelicula in peliculas %}
+      <a href="{% url 'detalle_pelicula' pelicula.id %}">
+        <div class="pelicula-card">
+          {% if pelicula.imagen_portada %}
+          <img
+            src="{{ pelicula.imagen_portada.url }}"
+            alt="{{ pelicula.titulo }}"
+          />
+          {% else %}
+          <img
+            src="https://via.placeholder.com/200x300"
+            alt="Portada no disponible"
+          />
+          {% endif %}
+          <h2>{{ pelicula.titulo }}</h2>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- Script para alternar modo oscuro -->
+    <script>
+      const darkModeToggle = document.getElementById("dark-mode-toggle");
+      const body = document.body;
+
+      // Verificar si el modo oscuro está activado en localStorage
+      if (localStorage.getItem("dark-mode") === "enabled") {
+        body.classList.add("dark-mode");
+      }
+
+      // Alternar modo oscuro
+      darkModeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        // Guardar preferencia en localStorage
+        if (body.classList.contains("dark-mode")) {
+          localStorage.setItem("dark-mode", "enabled");
+        } else {
+          localStorage.setItem("dark-mode", "disabled");
+        }
+      });
+    </script>
+  </body>
+</html>
