@@ -1,17 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Post</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
   </head>
   <body>
     {% for post in object_list %}
-    <h1>{{ post.title }}</h1>
-    <p>{{ post.content }}</p>
-    <p>{{ post.created_at }}</p>
-    {% if post.image %}
-    <img src="{{ post.image.url }}" alt="A ilust of {{ post.title }}" />
-    {% endif %} {% endfor %}
+    <div class="post-container">
+      <h1>{{ post.title }}</h1>
+      <p>{{ post.created_at }}</p>
+      <div class="content">
+        <p>{{ post.content }}</p>
+      </div>
+      {% if post.image %}
+      <div class="image-container">
+        <img src="{{ post.image.url }}" alt="A ilust of {{ post.title }}" />
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
   </body>
 </html>
