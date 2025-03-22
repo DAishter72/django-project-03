@@ -1,12 +1,39 @@
-/* styles.css */
+/* Estilos generales */
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   margin: 0;
   padding: 20px;
   color: #333;
+  transition: background-color 0.3s, color 0.3s;
 }
 
+/* Modo oscuro */
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+/* Botón de modo oscuro */
+#dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+#dark-mode-toggle:hover {
+  background-color: #0056b3;
+}
+
+/* Contenedor de posts */
 .post-container {
   background-color: #fff;
   border-radius: 8px;
@@ -16,37 +43,59 @@ body {
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+body.dark-mode .post-container {
+  background-color: #2d2d2d;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Título del post */
 .post-container h1 {
   font-size: 24px;
   margin-top: 0;
   color: #007BFF;
+  transition: color 0.3s;
 }
 
-.post-container p {
-  font-size: 16px;
-  line-height: 1.6;
+body.dark-mode .post-container h1 {
+  color: #4da6ff;
 }
 
-.post-container img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-top: 15px;
-}
-
-.post-container .date {
-  font-size: 14px;
-  color: #666;
+/* Contenedor de la fecha */
+.date-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 10px;
 }
 
+/* Icono de calendario */
+.calendar-icon {
+  font-size: 18px;
+}
+
+/* Fecha */
+.date {
+  font-size: 14px;
+  color: #666;
+  transition: color 0.3s;
+}
+
+body.dark-mode .date {
+  color: #a0a0a0;
+}
+
+/* Contenido del post */
 .post-container .content {
   margin-top: 10px;
 }
 
-.post-container .image-container {
-  text-align: center;
+/* Imagen del post */
+.post-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
   margin-top: 15px;
 }

@@ -4,23 +4,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Post</title>
+    <title>Blog de Posts</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
   </head>
   <body>
+    <!-- Botón para alternar modo oscuro -->
+    <button id="dark-mode-toggle">Modo Oscuro</button>
+
     {% for post in object_list %}
     <div class="post-container">
       <h1>{{ post.title }}</h1>
-      <p>{{ post.created_at }}</p>
+      <!-- Personalización de la fecha -->
+      <div class="date-container">
+        <span class="calendar-icon">📅</span>
+        <span class="date">{{ post.created_at|date:"DATETIME_FORMAT" }}</span>
+      </div>
       <div class="content">
         <p>{{ post.content }}</p>
       </div>
       {% if post.image %}
       <div class="image-container">
-        <img src="{{ post.image.url }}" alt="A ilust of {{ post.title }}" />
+        <img src="{{ post.image.url }}" alt="Ilustración de {{ post.title }}" />
       </div>
       {% endif %}
     </div>
     {% endfor %}
+
+    <!-- Script para alternar modo oscuro -->
+    <script>
+      const darkModeToggle = document.getElementById("dark-mode-toggle");
+      const body = document.body;
+
+      // Verificar si el modo oscuro está activado en localStorage
+      if (localStorage.getItem("dark-mode") === "enabled") {
+        body.classList.add("dark-mode");
+      }
+
+      // Alternar modo oscuro
+      darkModeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        // Guardar preferencia en localStorage
+        if (body.classList.contains("dark-mode")) {
+          localStorage.setItem("dark-mode", "enabled");
+        } else {
+          localStorage.setItem("dark-mode", "disabled");
+        }
+      });
+    </script>
   </body>
 </html>
